@@ -1,0 +1,4 @@
+a) Size is number of elements in an array list, capacity is the max number of elements it holds.
+b) any exponent of 2 up to 2^32
+c) they can grow and shrink, easy to append and edit
+d) stores a known number of elements, multidimentional

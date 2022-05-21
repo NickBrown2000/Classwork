@@ -1,0 +1,41 @@
+Script started on Mon 24 Aug 2020 04:33:24 PM EDT
+]0;brown_na@cobra:~/Labs/Lab1[?1034h[brown_na@cobra Lab1]$ cat Prog1.java
+
+import java.util.*;
+
+//  Lab program 1
+//  This program reads integers and stops when 0 is read.
+//  It will print the product of all the integers before the 0.
+
+//  The program contains no error handling.
+
+public class Prog1 
+{
+	public static void main (String[] args)
+	{
+   		int Product = 1;
+   		int value;
+                Scanner stdin = new Scanner(System.in);
+		value = stdin.nextInt();
+
+   		while (value != 0)
+   		{
+      			Product *= value;
+		        value = stdin.nextInt();
+   		}
+
+   		System.out.println("The product is "  + Product);
+
+		System.exit(0);
+	}
+}
+]0;brown_na@cobra:~/Labs/Lab1[brown_na@cobra Lab1]$ javac Prog1.java
+]0;brown_na@cobra:~/Labs/Lab1[brown_na@cobra Lab1]$ javac Prog1.java[C[C[C[C[1P Prog1.java[C[C[C[C[C[C[C[C[C[C[C < data1.dat
+Error: Could not find or load main class Prog1.java
+]0;brown_na@cobra:~/Labs/Lab1[brown_na@cobra Lab1]$ java Prog1.java < data1.dat[11Pc Prog1.java
+]0;brown_na@cobra:~/Labs/Lab1[brown_na@cobra Lab1]$ javac Prog1.java Prog1.java < data1.dat
+Error: Could not find or load main class Prog1.java
+]0;brown_na@cobra:~/Labs/Lab1[brown_na@cobra Lab1]$ exit
+exit
+
+Script done on Mon 24 Aug 2020 04:34:46 PM EDT
