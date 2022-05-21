@@ -1,0 +1,30 @@
+Script started on Mon 07 Dec 2020 03:32:07 PM EST
+]0;brown_na@cobra:~/Projects/FinalProject[?1034h[brown_na@cobra FinalProject]$ java Prog4c Prog4.java[6P Prog4c Prog4.java[C[1P.java[1P.java[1P.java[1P.java[1P.javaT.javai.javam.javae.javas.javah.javaa.javar.javae.java[1Phare.javaShare.java
+]0;brown_na@cobra:~/Projects/FinalProject[brown_na@cobra FinalProject]$ javac TimeShare.java[1P TimeShare.java[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pjava[1Pava[1Pva[1Pa[K jobs1.dat
+Job ID      Arrival Time        Start Time      Run Time        Wait Time       Turnaround
+------------------------------------------------------------------------------------------
+job1		1		1		3		0		3
+
+job2		2		4		2		2		4
+
+job3		10		10		5		0		5
+Average Wait Time:  0.6666666666666666
+CPU Usage:          10.0
+CPU Idle:           5.0
+CPU Usage (%):      66.66666666666666
+]0;brown_na@cobra:~/Projects/FinalProject[brown_na@cobra FinalProject]$ java TimeShare jobs1.dat[1P.dat2.dat
+Job ID      Arrival Time        Start Time      Run Time        Wait Time       Turnaround
+------------------------------------------------------------------------------------------
+job1		1		1		8		0		8
+
+job2		2		9		2		7		9
+
+job3		10		11		5		1		6
+Average Wait Time:  2.6666666666666665
+CPU Usage:          15.0
+CPU Idle:           1.0
+CPU Usage (%):      93.75
+]0;brown_na@cobra:~/Projects/FinalProject[brown_na@cobra FinalProject]$ exit
+exit
+
+Script done on Mon 07 Dec 2020 03:33:30 PM EST

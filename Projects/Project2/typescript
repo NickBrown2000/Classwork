@@ -1,0 +1,385 @@
+Script started on Tue 29 Sep 2020 11:46:34 AM EDT
+]0;brown_na@cobra:~/Projects/Project2[?1034h[brown_na@cobra Project2]$ java LibraryBookc LibraryBook.java
+]0;brown_na@cobra:~/Projects/Project2[brown_na@cobra Project2]$ javac LibraryBook.java[6P LibraryBook
+Select Your Library:
+[library.dat, play.dat]
+
+library.dat
+Sorted 30 Books
+~~~~~~~~~~~~~~~~~~~~
+ Great Books Search 
+~~~~~~~~~~~~~~~~~~~~
+1) Display All Books
+2) Search For Books 
+3) Exit Program     
+~~~~~~~~~~~~~~~~~~~~
+1
+Record #1
+~~~~~~~~~~~~~~~~~~~~
+Title       :Whisper of the River
+Author      :Sams, Ferrol
+CopyRight   :1984
+Price       :21.95
+Genre       :f
+
+Record #2
+~~~~~~~~~~~~~~~~~~~~
+Title       :Animal Farm
+Author      :Orwell, George
+CopyRight   :1978
+Price       :10.0
+Genre       :f
+
+Record #3
+~~~~~~~~~~~~~~~~~~~~
+Title       :Canterbury Tales
+Author      :Chaucer, Geoffrey
+CopyRight   :1965
+Price       :20.0
+Genre       :d
+
+Record #4
+~~~~~~~~~~~~~~~~~~~~
+Title       :Christmas Carol
+Author      :Dickens, Charles
+CopyRight   :1966
+Price       :12.5
+Genre       :f
+
+Record #5
+~~~~~~~~~~~~~~~~~~~~
+Title       :Great Gatsby
+Author      :Fitzgerald, F. Scott
+CopyRight   :1979
+Price       :5.99
+Genre       :f
+
+Record #6
+~~~~~~~~~~~~~~~~~~~~
+Title       :Heart of Darkness
+Author      :Conrad, Joseph
+CopyRight   :1970
+Price       :14.45
+Genre       :f
+
+Record #7
+~~~~~~~~~~~~~~~~~~~~
+Title       :Last of the Mohicans
+Author      :Cooper, James Fenimore
+CopyRight   :1968
+Price       :8.75
+Genre       :f
+
+Record #8
+~~~~~~~~~~~~~~~~~~~~
+Title       :Leaves of Grass
+Author      :Whitman, Walt
+CopyRight   :1975
+Price       :29.99
+Genre       :p
+
+Record #9
+~~~~~~~~~~~~~~~~~~~~
+Title       :Les Miserables
+Author      :Hugo, Victor
+CopyRight   :1988
+Price       :19.98
+Genre       :f
+
+Record #10
+~~~~~~~~~~~~~~~~~~~~
+Title       :Moby Dick
+Author      :Melville, Herman
+CopyRight   :1962
+Price       :13.98
+Genre       :f
+
+Record #11
+~~~~~~~~~~~~~~~~~~~~
+Title       :Odyssey
+Author      :Homer
+CopyRight   :1950
+Price       :9.99
+Genre       :f
+
+Record #12
+~~~~~~~~~~~~~~~~~~~~
+Title       :Old Man and the Sea
+Author      :Hemingway, Ernest
+CopyRight   :1966
+Price       :9.95
+Genre       :f
+
+Record #13
+~~~~~~~~~~~~~~~~~~~~
+Title       :Romeo and Juliet
+Author      :Shakespeare, William
+CopyRight   :1980
+Price       :4.99
+Genre       :d
+
+Record #14
+~~~~~~~~~~~~~~~~~~~~
+Title       :Scarlet Letter
+Author      :Hawthorne, Nathaniel
+CopyRight   :1981
+Price       :4.78
+Genre       :f
+
+Record #15
+~~~~~~~~~~~~~~~~~~~~
+Title       :Tom Sawyer
+Author      :Twain, Mark
+CopyRight   :1972
+Price       :8.5
+Genre       :f
+
+~~~~~~~~~~~~~~~~~~~~
+ Great Books Search 
+~~~~~~~~~~~~~~~~~~~~
+1) Display All Books
+2) Search For Books 
+3) Exit Program     
+~~~~~~~~~~~~~~~~~~~~
+2
+Moby Dick
+Record #10
+~~~~~~~~~~~~~~~~~~~~
+Title       :Moby Dick
+Author      :Melville, Herman
+CopyRight   :1962
+Price       :13.98
+Genre       :f
+
+~~~~~~~~~~~~~~~~~~~~
+ Great Books Search 
+~~~~~~~~~~~~~~~~~~~~
+1) Display All Books
+2) Search For Books 
+3) Exit Program     
+~~~~~~~~~~~~~~~~~~~~
+2
+Odyssey
+Record #11
+~~~~~~~~~~~~~~~~~~~~
+Title       :Odyssey
+Author      :Homer
+CopyRight   :1950
+Price       :9.99
+Genre       :f
+
+~~~~~~~~~~~~~~~~~~~~
+ Great Books Search 
+~~~~~~~~~~~~~~~~~~~~
+1) Display All Books
+2) Search For Books 
+3) Exit Program     
+~~~~~~~~~~~~~~~~~~~~
+2
+Animal Farm
+Record #2
+~~~~~~~~~~~~~~~~~~~~
+Title       :Animal Farm
+Author      :Orwell, George
+CopyRight   :1978
+Price       :10.0
+Genre       :f
+
+~~~~~~~~~~~~~~~~~~~~
+ Great Books Search 
+~~~~~~~~~~~~~~~~~~~~
+1) Display All Books
+2) Search For Books 
+3) Exit Program     
+~~~~~~~~~~~~~~~~~~~~
+2
+Macbeth
+Not Available
+~~~~~~~~~~~~~~~~~~~~
+ Great Books Search 
+~~~~~~~~~~~~~~~~~~~~
+1) Display All Books
+2) Search For Books 
+3) Exit Program     
+~~~~~~~~~~~~~~~~~~~~
+3
+]0;brown_na@cobra:~/Projects/Project2[brown_na@cobra Project2]$ cat LibraryBook.java
+import java.util.*;
+import java.io.*;
+
+public class LibraryBook
+{
+
+    private static int numBooks = 0;
+    private String title;
+    private String author;
+    private int copyright;
+    private double price;
+    private String genre;
+    static int input = 0;
+    static ArrayList<LibraryBook> Books = new ArrayList<>(50);
+
+
+    //Main Code Run By Class
+    public  static void main(String[] args) throws IOException{
+
+        Scanner userSel = new Scanner(System.in);
+        System.out.println("Select Your Library:");
+        System.out.println(LibraryBook.getFiles()+"\n");
+
+        LibraryBook.makeLibrary(Books,userSel.next());
+        Books.trimToSize();
+        LibraryBook.sort(Books);
+
+        while(input!=3) {
+            LibraryBook.printMenu();
+            input = userSel.nextInt();
+            LibraryBook.ChooseFunction(Books, input);
+        }
+
+    }
+
+    private static String getFiles() {
+        //Get all files from directory
+        File curDir = new File(".");
+        String[] fileNames = curDir.list();
+        ArrayList<String> data = new ArrayList<String>();
+
+        //Find files which may have data. (aka, are in the .dat format)
+        for(String s:fileNames) {
+            if (s.endsWith(".dat")) {
+                data.add(s);
+            }
+        }
+        return String.valueOf(data);
+    }
+
+
+    //Scans File Into ArrayList Books
+    private static void makeLibrary(ArrayList<LibraryBook> Book, String file) throws FileNotFoundException {
+
+
+
+        Scanner lib = new Scanner(new File (file)).useDelimiter(";");
+
+        while (lib.hasNext()) {
+            Scanner fill = new Scanner(lib.nextLine()).useDelimiter(";");
+            String ti = fill.next();
+            String au = fill.next();
+            int co = fill.nextInt();
+            double pr = fill.nextDouble();
+            String ge = fill.next();
+            numBooks++;
+            Book.add(new LibraryBook(ti, au, co, pr, ge));
+        }
+    }
+
+    private static void sort(ArrayList<LibraryBook> Book) {
+        ArrayList<LibraryBook> temp = new ArrayList<>(5);
+        temp.add(0,Book.get(0));
+        for(int i = 0; i<Book.size(); i++){
+            for(int j = 1; j<Book.size();j++){
+                if(Book.get(i).compareTo(Book.get(j))<0){
+                    temp.set(0,Book.get(i));
+                    Book.set(i,Book.get(j));
+                    Book.set(j,temp.get(0));
+                }
+            }
+        }
+    System.out.println("Sorted "+numBooks+" Books");
+    }
+
+    //Prints Menu Options
+    public static void printMenu(){
+        System.out.println("~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(" Great Books Search ");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("1) Display All Books");
+        System.out.println("2) Search For Books ");
+        System.out.println("3) Exit Program     ");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    //Lets User Select What They Want To Do
+    public static void ChooseFunction(ArrayList<LibraryBook> Book, int in){
+        if(in == 1){
+            for(int i = 0; i<Book.size(); i++){
+                System.out.println("Record #"+(i+1));
+                System.out.println("~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Title       :"+Book.get(i).getTitle());
+                System.out.println("Author      :"+Book.get(i).getAuthor());
+                System.out.println("CopyRight   :"+Book.get(i).getCopyright());
+                System.out.println("Price       :"+Book.get(i).getPrice());
+                System.out.println("Genre       :"+Book.get(i).getGenre()+"\n");
+            }
+        }
+        else if(in == 2){
+            Scanner search = new Scanner(System.in);
+            String booksh = search.nextLine();
+            for(int i = 0; i<Book.size(); i++){
+                if(booksh.equalsIgnoreCase(Book.get(i).getTitle())) {
+                    System.out.println("Record #" + (i + 1));
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("Title       :" + Book.get(i).getTitle());
+                    System.out.println("Author      :" + Book.get(i).getAuthor());
+                    System.out.println("CopyRight   :" + Book.get(i).getCopyright());
+                    System.out.println("Price       :" + Book.get(i).getPrice());
+                    System.out.println("Genre       :" + Book.get(i).getGenre() + "\n");
+                    break;
+                }
+                else if (i+1==Book.size()){
+                    System.out.println("Not Available");
+                }
+            }
+
+        }
+    }
+
+    // Constructor for book.
+    public LibraryBook (String booktitle, String authorname, int cpyright, double bookprice, String ngenre)
+    {
+        numBooks++;
+        title = booktitle;
+        author = authorname;
+        copyright = cpyright;
+        price = bookprice;
+        genre = ngenre;
+    }
+
+    // Returns title of book.
+    public String getTitle()
+    {
+        return title;
+    }
+
+    // Returns author of book.
+    public String getAuthor()
+    {
+        return author;
+    }
+
+    // Returns copyright year of book.
+    public int getCopyright()
+    {
+        return copyright;
+    }
+
+    public double getPrice()
+    {
+        return price;
+    }
+
+    public String getGenre()
+    {
+        return genre;
+    }
+
+    public int compareTo (LibraryBook book2)
+    {
+        return title.compareTo(book2.getTitle());
+    }
+}
+]0;brown_na@cobra:~/Projects/Project2[brown_na@cobra Project2]$ cat[K[K[Kext[Kit
+exit
+
+Script done on Tue 29 Sep 2020 11:49:34 AM EDT

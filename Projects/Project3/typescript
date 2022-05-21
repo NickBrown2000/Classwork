@@ -1,0 +1,148 @@
+Script started on Tue 03 Nov 2020 12:29:04 PM EST
+]0;brown_na@cobra:~/Projects/Project3[?1034h[brown_na@cobra Project3]$ exitProg3.javacp *.java /scratch/csc205/brown_na/Labs[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CProg3.java[K[6Pexit[K[K[K[Kjava Prog3
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+N
+Enter Name: Nick Brown
+Hourly (H) or Salaried (s): Please Try Again
+S A
+Please Try Again
+B
+Please Try Again
+D
+Please Try Again
+H
+Enter Wage:25.36
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+N
+Enter Name: Andy Digh^[[D^[[D         h^[[D             Dr Digh
+Hourly (H) or Salaried (s): Please Try Again
+S
+Enter Wage:100000
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+C
+Enter number of hours worked by: Nick
+50
+Pay: 1394.80
+Enter number of hours worked by: Dr
+50
+Pay: 1923.08
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+R
+Enter the percentage pay increase: 10
+Nick: 27.90/Hour
+Dr: 2115.38/Week
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+P
+Nick: 27.90/Hour
+Dr: 2115.38/Week
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+D
+Downloading data to file...
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+Q
+Quitting Program
+]0;brown_na@cobra:~/Projects/Project3[brown_na@cobra Project3]$ java Prog3
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+U
+Uploading data from file...
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+P
+Nick: 27.90/Hour
+Dr: 2115.38/Week
+***********************************
+*  COMMANDS:                      *
+*               N: New Employee   *
+*               C: Compute Pay    *
+*               R: Raise Wages    *
+*               P: Print Records  *
+*               D: Download Data  *
+*               U: Upload Data    *
+*               Q: Quit           *
+***********************************
+Q Q
+Quitting Program
+]0;brown_na@cobra:~/Projects/Project3[brown_na@cobra Project3]$ exit
+exit
+
+Script done on Tue 03 Nov 2020 12:31:57 PM EST
