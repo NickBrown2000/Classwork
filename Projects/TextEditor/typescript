@@ -1,0 +1,302 @@
+Script started on Fri 12 Feb 2021 03:25:51 PM EST
+]0;brown_na@cobra:~/CSC245/Projects/TextEditor[?1034h[brown_na@cobra TextEditor]$ cat editor.cpp
+#include <cstdlib>
+#include <cstdio>
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include "linelist.h"
+using namespace std;
+
+//void OpenFile(int argc, char *argv[]);
+void PrintMenu();
+string input();
+
+int main(int argc, char *argv[])
+{
+    LineList* doc = new LineList;
+    char select;
+    
+    PrintMenu();
+    //Read in File to list
+    if(argc != 2)
+    {
+      cout<<"Invalid: Please Enter Filename"<<endl;
+      exit(0);
+    }
+    else
+    {
+      cout << "Opening File..." << endl;
+      string file = argv[1];
+      ifstream infile;
+      infile.open(file.c_str());
+    
+      string line;
+      while(1)
+      {
+        getline(infile, line);
+        if(infile.eof())
+        {
+        break;
+        }
+        doc -> insertLine(line);
+      }
+      infile.close();
+      
+    }
+    //take commands
+    while(1)
+    {
+    cout<< doc -> getCurrLineNum() << ")";
+    cin>>select;
+    
+      if(select == 'I')
+      {
+        cout<<"Enter A New Line:"<<endl;
+        doc->insertLine(input());
+      }
+      else if(select == 'D')
+      {
+        doc->deleteLine();
+      }
+      else if(select == 'L')
+      {
+         doc->printList();
+      }
+      else if(select == 'P')
+      {
+        doc->movePrevLine();
+      }
+      else if(select == 'N')
+      {
+        doc->moveNextLine();
+      }
+      else if(select == 'E')
+      {
+        break;
+      }
+      else
+      {
+        cout<<"Invalid Selection, Please Try Again";
+      }
+    }
+    
+    //save new document to file
+      
+      cout << "Saving File..." << endl;
+      doc -> goToTop();
+      string file = argv[1];
+      ofstream outfile;
+      outfile.open(file.c_str());
+    
+      string line;
+      while(1)
+      {
+        line = doc->getCurrLine();
+        outfile<< line<<"\n";
+        if(doc->getCurrLineNum()>=doc->getLength())
+        {
+        break;
+        }
+        doc->moveNextLine();
+      }
+      outfile.close(); 
+}
+
+void PrintMenu()
+{
+    cout<<"List Of Commands:"
+          "\nI: Insert New Line"
+          "\nD: Delete Selected Line"
+          "\nL: List All Current Lines"
+          "\nP: Move To Previous Line"
+          "\nN: Move to Next Line"
+          "\nE: Exit Program And Save"<<endl;
+}
+
+string input()
+{
+    string input;
+    cin >> input;
+    return input;
+}]0;brown_na@cobra:~/CSC245/Projects/TextEditor[brown_na@cobra TextEditor]$ cat linelist.cpp
+#include "linelist.h"
+
+LineList::LineList()
+{
+	LineNode *line = new LineNode;
+	LineNode *line2 = new LineNode;
+
+	line -> info = topMessage;
+	currLine = line;
+	currLineNum = 0;
+	length = 0;
+	line2 -> info = bottomMessage;
+	currLine -> back = NULL;
+	currLine -> next = line2;
+	line2 -> back = line;
+	line2 -> next = NULL;
+}
+
+void LineList::goToTop() 
+{
+  // Post : Advances currLine to line 1
+  while(1)
+  {
+    movePrevLine();
+    currLineNum --;
+    if(currLineNum == 0)
+    {
+    movePrevLine();
+    break;
+    }
+  }
+}
+
+void LineList::goToBottom() 
+{
+	// Post : Advances currLine to last line
+  while(1)
+  {
+    moveNextLine();
+    currLineNum++;
+    if(currLineNum == length+1)
+    {
+    break;
+    }
+  }
+}
+
+void LineList::insertLine(string newLine)
+{
+    
+    if((length == 0)||(currLineNum != length+1))
+    {
+	  // post : newLine has been inserted after the current line
+    length++;
+    currLineNum++;
+    
+    LineNode* temp = new LineNode;
+    temp->info = newLine;
+ 
+    temp->next = currLine->next;
+    currLine->next = temp;
+    temp->back = currLine;
+    temp->next->back = temp;
+    
+    currLine = currLine->next;
+    }
+    else
+    {
+    cout<<"Cannot Add A Line There"<<endl;
+    }
+    goToTop();
+}
+
+void LineList::deleteLine()
+{
+	// post : deletes the current line leaving currentLine
+	// pointing to line following
+ if(currLine == NULL || currLineNum == 0 || currLineNum == length+1)
+ {
+ cout<<"Cannot delete line"<<endl;
+ }
+ else if(currLine->next == NULL)
+ {
+ movePrevLine();
+ currLine->next = NULL;
+ length--;
+ }
+ else
+ {
+ moveNextLine();
+ currLine->back=currLine->back->back;
+ currLine->back->next=currLine->back->next->next;
+ length--;
+ }
+ 
+}
+
+void LineList::printList() 
+{
+    goToTop();
+    for(int i=0;i<=getLength()+1;i++)
+    {
+    cout<<getCurrLineNum()<<") "<<getCurrLine()<<"\n";
+    moveNextLine();
+    }
+}
+
+string LineList::getCurrLine() const
+{
+return currLine->info;
+}
+
+void LineList::moveNextLine()
+{
+	// Post : Advances currLine (unless already at last line)
+  if(currLine->next != NULL)
+  {
+  currLine = currLine->next;
+  currLineNum++;
+  }
+}
+
+void LineList::movePrevLine()
+{
+  // Post : Advances currLine (unless already at last line)
+  if(currLine->back != NULL)
+  {
+  currLine = currLine->back;
+  currLineNum--;
+  }
+}
+
+int LineList::getCurrLineNum() const
+{
+  return currLineNum;
+}
+
+int LineList::getLength() const
+{
+  return length;
+}]0;brown_na@cobra:~/CSC245/Projects/TextEditor[brown_na@cobra TextEditor]$ cat linelist.cpp[2Peditor.cpplear[K./a.out testfilec++ editor.cpp linelist.o
+]0;brown_na@cobra:~/CSC245/Projects/TextEditor[brown_na@cobra TextEditor]$ c++ editor.cpp linelist.o[9Pat linelist.cpp[2Peditor.cpplear[K./a.out testfile
+List Of Commands:
+I: Insert New Line
+D: Delete Selected Line
+L: List All Current Lines
+P: Move To Previous Line
+N: Move to Next Line
+E: Exit Program And Save
+Opening File...
+3)P L
+0)  - - - Top of file - - - 
+1) Line 1
+2) Line 2
+3) Line 3
+4)  - - - Bottom of file - - - 
+4)P
+3)I
+Enter A New Line:
+Hello
+4)L
+-1) Line 1
+0) Line 2
+1) Line 3
+2) Hello
+3)  - - - Bottom of file - - - 
+3)  - - - Bottom of file - - - 
+3)L
+0)  - - - Top of file - - - 
+1) Line 1
+2) Line 2
+3) Line 3
+4) Hello
+5)  - - - Bottom of file - - - 
+5)E
+Saving File...
+]0;brown_na@cobra:~/CSC245/Projects/TextEditor[brown_na@cobra TextEditor]$ exit
+exit
+
+Script done on Fri 12 Feb 2021 03:29:30 PM EST

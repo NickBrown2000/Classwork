@@ -1,0 +1,30 @@
+read and hash dictionary
+
+grab single word from file
+
+hash word and check against dict
+
+if its there continue through file
+if not print menu and add to arraylist of found mistakes if it is not alredy there
+
+a) add to dict
+take hash of word and add it
+
+b) ignore
+add to arraylist of ignored words, remove from mistakes arraylist
+
+c) go to next word
+continue without doing anything
+
+d) search for suggestion
+look for a suggestion of the word
+
+e) quit
+output all missed words to a file then quit.
+
+repeat from line 3 until file has no more words.
+
+2 binary search tree
+1 hash table
+2 input files
+1 output file
